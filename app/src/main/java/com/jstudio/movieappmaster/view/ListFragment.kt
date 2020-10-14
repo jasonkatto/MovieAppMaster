@@ -41,7 +41,7 @@ class ListFragment : Fragment() {
         observeViewModel()
 
         refreshLayout.setOnRefreshListener {
-            moviesList.visibility=View.VISIBLE
+            moviesList.visibility=View.GONE
             listError.visibility=View.GONE
             loadingView.visibility=View.VISIBLE
             refreshLayout.isRefreshing=false
