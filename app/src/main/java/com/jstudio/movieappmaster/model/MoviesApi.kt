@@ -1,10 +1,14 @@
 package com.jstudio.movieappmaster.model
 
-import io.reactivex.Single
+import com.jstudio.movieappmaster.model.movie.Example
+import retrofit2.Call
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 interface MoviesApi {
 
-    @GET("3/movie/550?api_key=464f15d480e6f406f0e732d52706b2e0")
-    fun getMovies(): Single<List<MovieInfo>>
+    @GET("3/movie/popular")
+    open fun getMovies(@Query("api_key") apiKey: String?): Call<Example?>?
+
+//    fun getMovies(@Query("api_key") apiKey: String): Single<List<MovieInfo>>
 }

@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
     app:startDestination="@id/listFragment">
 
     <fragment
         android:id="@+id/listFragment"
         android:name="com.jstudio.movieappmaster.view.ListFragment"
-        android:label="ListFragment" >
+        android:label="ListFragment">
         <action
             android:id="@+id/actionDetailFragment"
             app:destination="@id/detailFragment"
@@ -16,14 +17,18 @@
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.jstudio.movieappmaster.view.DetailFragment"
-        android:label="DetailFragment" >
+        android:label="DetailFragment">
         <action
             android:id="@+id/actionListFragment"
             app:destination="@id/listFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
         <argument
-            android:name="MovieUuid"
-            app:argType="integer" />
+            android:name="movieImage"
+            app:argType="string" />
+
+        <argument
+            android:name="movieOverview"
+            app:argType="string" />
     </fragment>
 </navigation>

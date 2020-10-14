@@ -5,16 +5,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.jstudio.movieappmaster.R
-import com.jstudio.movieappmaster.model.MovieInfo
+import com.jstudio.movieappmaster.model.movie.Result
 import kotlinx.android.synthetic.main.item_movie.view.*
 import kotlinx.android.synthetic.main.item_movie.view.movie_name
 
-class MovieListAdapter(val movieList: ArrayList<MovieInfo>) :
+class MovieListAdapter(val movieList: ArrayList<Result>) :
     RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>() {
 
 
-    fun updateMoviesList(newMovieList: List<MovieInfo>) {
+    fun updateMoviesList(newMovieList: List<Result>) {
         movieList.clear()
         movieList.addAll(newMovieList)
         notifyDataSetChanged()
@@ -30,12 +31,22 @@ class MovieListAdapter(val movieList: ArrayList<MovieInfo>) :
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        holder.view.movie_name.text = movieList[position].movieName
-        holder.view.movie_category.text = movieList[position].movieCategory
-        holder.view.movie_homepage.text = movieList[position].movieHomepage
+        holder.view.movie_name.text = movieList[position].title
+        holder.view.movie_category.text = movieList[position].releaseDate
+        holder.view.movie_homepage.text = movieList[position].originalLanguage
+        Glide.with(holder.view).load(
+            "https://image.tmdb.org/t/p/w500" + movieList[position]
+                .posterPath
+        ).into(holder.view.imageView)
 
         holder.view.setOnClickListener {
-            Navigation.findNavController(it).navigate(ListFragmentDirections.actionDetailFragment(5))
+            Navigation.findNavController(it)
+                .navigate(
+                    ListFragmentDirections.actionDetailFragment(
+                        "https://image.tmdb.org/t/p/w500" + movieList[position]
+                            .posterPath, movieList[position].overview
+                    )
+                )
 
 
         }
